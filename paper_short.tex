@@ -1,0 +1,89 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% preamble
+
+\documentclass[twocolumn]{cinc}
+\usepackage[T1]{fontenc}
+\usepackage{mathtools, graphicx, xurl, hyperref}
+% \usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, external, decorations.pathmorphing, backgrounds, positioning, fit, petri, calc, hobby, cd}
+% \tikzexternalize[prefix=tikz/,optimize command away=\includepdf]
+\usepackage{boldline, multirow}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{colortbl}
+\usepackage{subcaption}
+\usepackage{relsize}
+\usepackage[ruled, vlined]{algorithm2e}
+
+% \tikzstyle{smallcircleblock} = [circle, draw, text width = 0.7em, text centered]
+
+% \tikzstyle{wideblock} = [rectangle, draw, text width = 6.5em, text centered, rounded corners, inner sep = 7pt, minimum height = 1.0em]
+
+
+\newcolumntype{g}{>{\columncolor[gray]{0.8}}l}
+
+
+\newif\ifcoloredtext
+\coloredtextfalse
+
+\newif\ifboxednn
+\boxednntrue
+
+
+\newenvironment{indentedquote}[1]%
+{\list{}{\leftmargin=#1\rightmargin=#1}\item[]}%
+{\endlist}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% title, author, institution
+
+\title{Predicting Neurological Recovery from Coma with Longitudinal Electroencephalogram Using Deep Neural Networks}
+\author{Jingsu Kang\textsuperscript{1},
+Hao Wen\textsuperscript{2} \\ \ \\
+\textsuperscript{1}Tianjin Medical University, Tianjin, China\\
+\textsuperscript{2}College of Science, China Agricultural University, Beijing, China
+}
+
+\begin{document}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% abstract
+\input{contents/abstract}
+
+% main body of the paper
+
+\input{contents/introduction}
+
+\input{contents/methods}
+
+\input{contents/results}
+
+\input{contents/discussions}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% acknowledgments
+
+\input{contents/acknowledgements}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\bibliographystyle{cinc}
+% \bibliography{references}
+\bibliography{references-reduced}
+
+\begin{correspondence}
+Hao Wen\\
+No. 17, Qinghua East Road, Haidian District, Beijing, China\\
+wenh06@cau.edu.cn,wenh06@gmail.com
+\end{correspondence}
+
+\balance
+
+\end{document}
