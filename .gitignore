@@ -2,25 +2,29 @@
 # tex ignore
 ##############################################
 
-*.pdf
 *.aux
-*.glo
-*.idx
-*.log
-*.toc
-*.ist
-*.acn
-*.acr
-*.alg
+*.bak
 *.bbl
 *.blg
 *.dvi
-*.glg
+*.glo
 *.gls
+*.idx
 *.ilg
 *.ind
+*.ist
+*.log
+*.out
+*.thm
+*.toc
+*.toe
 *.lof
 *.lot
+*.loe
+*.vrb
+*.hd
+*.fdb_latexmk
+*.fls
 *.maf
 .mtc
 *.out
@@ -29,13 +33,19 @@
 *.run.xml
 *blx.bib
 *.synctex.gz
-*.fdb_latexmk
-*.fls
 *.tmppart
-*.auxlock
+*.abs
+*.sav
+*.bcf
 *.xdv
+*.synctex\(busy\)
+*.synctex
+*.synctex.gz\(busy\)
+*.synctex.gz
+*.spl
 
-tikz/
+!tikz
+tikz/*
 !tikz/.keep
 
 
@@ -53,7 +63,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-build/
+# build/
 develop-eggs/
 dist/
 downloads/
@@ -188,3 +198,7 @@ log
 *.npy
 
 !images/*.pdf
+
+!build
+build/*
+!build/.keep
