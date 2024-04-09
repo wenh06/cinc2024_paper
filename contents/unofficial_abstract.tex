@@ -1,15 +1,25 @@
 % -*- Mode:TeX -*-
 
 \documentclass{cinc-abstract}
+
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{relsize}
+\usepackage{pifont}
+\usepackage{currfile}
+
+\newcommand\wordcount{\input{|"texcount -inc -sum -0 -utf8 -ch -template={SUM} \currfilepath"}}
+
+
 \begin{document}
 
 % The title is set in 14-point Helvetica bold
-\title{To write}
+\title{A Novel Multi-Task Learning Framework for Simultaneous Digitization and Classification of Electrocardiogram Images}
 
 % The rest of the title block is set in 12 points Helvetica
 \author {Jingsu Kang, Hao Wen\\ % First name, initials and surnames, no ``and''
 \ \\ % leave an empty line between authors and affiliation
-Tianjin Medical University\\  % give affiliation of the first author only
+Tianjin Medical University\\  % gives affiliation of the first author only
 Tianjin, China} % city, [state or province,] country only
 
 \maketitle
@@ -19,12 +29,25 @@ Tianjin, China} % city, [state or province,] country only
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Aim: to write ....
+Aim: The problem of simultaneous digitization and classification (normal or abnormal) of electrocardiograms (ECGs) captured from images or paper printouts, as posed by the George B. Moody PhysioNet Challenge 2024, is studied in this paper. This is a challenging and important problem in the field of medical image analysis.
 
-Methods: to write ....
+Methods: We designed an end-to-end multi-task learning framework to digitize and classify ECG images simultaneously. The framework consists of a shared feature extraction backbone network and two task-specific head networks. We tested pretrained backbone networks of various architectures including ConvNeXt and Swin Transformer. The models were trained using a combination of cross-entropy loss for classification and signal-to-noise ratio loss for digitization. The model weights were optimized using the AdamW optimizer in conjunction with the OneCycle learning rate scheduler. ECG image data for training and validation were synthesized from the PTB-XL ECG dataset which contains 21799 clinical 12-lead time-series ECG recordings.
 
-Results: The best entry submission of our team ``Revenger'' to write ....
+Further study will focus on designing and comparing an alternative several-stage solution to the digitization problem, consisting primarily of an object detection model and a self-adaptive edge sharpening algorithm for ECG curve extraction.
 
-Conclusion: to write ....
+% TODO: fill in the scores and ranks after all of the results are available
+Results: The best submission entry of our team ``Revenger'' achieved an F1 score of xxx, ranked xxx-th, on the hidden validation set for the classification task and a signal-to-noise ratio of xxx, ranked xxx-th, for the digitization task.
+
+Conclusion: The proposed multi-task learning model achieved competitive performance in the Challenge, hence able to provide an effective solution to the problem of simultaneous digitization and classification of ECG images. The alternative solution is expected to further improve the digitization performance.
+
+
+% \ifhandout
+% % do nothing
+% \else
+% \begin{center}
+% {\larger[2]\color{red} \ding{43}\ding{43}  Totally \wordcount words \reflectbox{\ding{43}\ding{43}}}
+% \end{center}
+% \fi
+
 
 \end{document}
