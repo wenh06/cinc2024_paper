@@ -29,16 +29,15 @@ Tianjin, China} % city, [state or province,] country only
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-Aim: The problem of simultaneous digitization and classification (normal or abnormal) of electrocardiograms (ECGs) captured from images or paper printouts, as posed by the George B. Moody PhysioNet Challenge 2024, is studied in this paper. This is a challenging and important problem in the field of medical image analysis.
+Aim: The problem of simultaneous digitization and classification (normal or abnormal) of electrocardiograms (ECGs) captured from images or paper printouts, as posed by the George B. Moody PhysioNet Challenge 2024, is studied in this paper. This is a challenging and important problem in medical image analysis.
 
-Methods: We designed an end-to-end multi-task learning framework to digitize and classify ECG images simultaneously. The framework consists of a shared feature extraction backbone network and two task-specific head networks. We tested pretrained backbone networks of various architectures including ConvNeXt and Swin Transformer. The models were trained using a combination of cross-entropy loss for classification and signal-to-noise ratio loss for digitization. The model weights were optimized using the AdamW optimizer in conjunction with the OneCycle learning rate scheduler. ECG image data for training and validation were synthesized from the PTB-XL ECG dataset which contains 21799 clinical 12-lead time-series ECG recordings.
+Methods: We designed an end-to-end multi-task learning framework to digitize and classify ECG images simultaneously. The framework comprises a shared feature extraction backbone network and two task-specific head networks. We tested pretrained backbone networks of various architectures, including ResNet, ConvNeXt, and Swin Transformer. The models were trained using a combination of cross-entropy loss for classification and signal-to-noise ratio (SNR) loss for digitization. The model weights were optimized using the AdamW optimizer and the OneCycle learning rate scheduler. ECG image data for training and validation were synthesized from the PTB-XL ECG dataset which contains 21799 clinical 12-lead time-series ECG recordings. We kept 10\% of the data as the validation set for model selection, where the data split was provided by the PTB-XL dataset. The selection was based on a mixture of classification and digitization performance.
 
 Further study will focus on designing and comparing an alternative several-stage solution to the digitization problem, consisting primarily of an object detection model and a self-adaptive edge sharpening algorithm for ECG curve extraction.
 
-% TODO: fill in the scores and ranks after all of the results are available
-Results: The best submission entry of our team ``Revenger'' achieved an F1 score of xxx, ranked xxx-th, on the hidden validation set for the classification task and a signal-to-noise ratio of xxx, ranked xxx-th, for the digitization task.
+Results: The best submission entry of our team ``Revenger’’ achieved an F1 score of 0.626, ranked 16-th, on the hidden validation set for the classification task and an SNR of -13.203, ranked 30-th, for the digitization task.
 
-Conclusion: The proposed multi-task learning model achieved competitive performance in the Challenge, hence able to provide an effective solution to the problem of simultaneous digitization and classification of ECG images. The alternative solution is expected to further improve the digitization performance.
+Conclusion: The proposed multi-task learning model achieved competitive performance in the Challenge, providing an effective solution to the problem of simultaneous digitization and classification of ECG images. The alternative solution is expected to improve the digitization performance further.
 
 
 % \ifhandout
