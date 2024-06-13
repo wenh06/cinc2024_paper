@@ -1,0 +1,33 @@
+============================================================================
+                            REVIEWER #1
+============================================================================
+
+Author Comments
+---------------------------------------------------------------------------
+This submission describes a multi-task framework to accomplish both the reconstruction as well as classification tasks with a performance of SNR= -13 and F1 = .626, respectively. 
+
+The abstract would be strengthened by further discussion of the clinical relevance and impact of these tasks.
+---------------------------------------------------------------------------
+
+
+
+============================================================================
+                            REVIEWER #2
+============================================================================
+
+Author Comments
+---------------------------------------------------------------------------
+Please avoid generic statements like 'This problem is crucial in medical image analysis' without briefly explaining why.
+---------------------------------------------------------------------------
+
+
+
+============================================================================
+                            REVIEWER #3
+============================================================================
+
+Author Comments
+---------------------------------------------------------------------------
+- The title should not be similar to the title of the Challenge. Please consider revising it.
+- The abstract should not describe the Challenge itself. Please focus solely on your methodology and findings.
+---------------------------------------------------------------------------
