@@ -1,13 +1,13 @@
 \begin{abstract}
 
-% NOT finished
+% finished
 
 Aim: This paper addresses the challenge of simultaneous digitization and arrhythmia classification of electrocardiograms (ECGs) captured from images or paper printouts, as presented by the George B. Moody PhysioNet Challenge 2024.
 
-Methods: We propose a multi-stage framework to digitize and classify ECG images concurrently. The framework consists
+Methods: We propose a multi-stage framework to digitize and classify ECG images concurrently. The framework consists of 3 modules: (1) Region of Interest (ROI) extraction, (2) Arrhythmia classification, and (3) ECG waveform digitization. The ROI extraction module uses object detection to locate the ECG region in the image. We employ a DETR model with a ResNet-50 backbone to detect the ECG region. The arrhythmia classification module uses a light-weight ConvNeXt model to classify the ECG signal. The ECG waveform digitization module uses a U-Net model to extract the ECG waveform from the image. The digitization task envolves a highly unbalanced segmentation problem, where the ECG waveform occupies a small portion of the image. We propose a novel loss function to address this issue.
 
-Results: Our team (''Revenger'') to write ....
+Results: Our team (''Revenger'') achieved a score of 0.33 for the classification problem on the hidden validation set, ranked 37/77; and SNR of -0.733 for the digitization problem, ranked 37/71.
 
-Conclusion: to write ....
+Conclusion: The proposed framework demonstrates the feasibility of digitizing and classifying ECG images concurrently, but needs further improvement to achieve better performance.
 
 \end{abstract}
