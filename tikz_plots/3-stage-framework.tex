@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+node distance=1.2cm,
+>={Triangle[angle=60:1pt 2]},
+shorten >= 2pt,
+shorten <= 2pt,
+arrow/.style={
+    ->,
+    arrowblue,
+    line width=5pt
+}
+]
+\ImageNode[label={95:ECG Image}]{raw}{width=0.2\textwidth}{images/00666_hr-0.png}
+\ImageNode[label={-90:Detected Boxes}, below right = 0.8cm and 1.35cm of raw.south east, anchor = south east]{bbox}{width=0.2\textwidth}{images/image_with_detected_boxes.pdf}
+\ImageNode[label={-90:Extracted ROI}, right=of bbox]{roi}{width=0.2\textwidth}{images/ROI-example.pdf}
+\ImageNode[label={-90:Segmented Waveforms}, below right=-0.2cm and 1.3cm of roi]{seg}{width=0.2\textwidth}{images/ROI_with_predicted_mask.png}
+\node[above=of seg] (sig) {\textbf{Digitized 12-Lead Signal}};
+\node[above=of roi] (cls) {\textbf{Predicted Classes}};
+\ImageNode[above=0.1cm of sig]{sigch0}{width=0.2\textwidth}{images/ecg_eg_bare_ch0.pdf}
+\begin{scope}[on background layer]
+% \ImageNode[above right = 0.3cm and 0.3cm of sigch0.south west, anchor = south west]{sigch1}{width=0.2\textwidth}{images/ecg_eg_bare_ch1.pdf}
+\node[rotate=45, above right=-0.4cm and 0.1cm of sigch0.north] (dots) {\huge $\cdots$};
+\ImageNode[above right=-0.05cm and 0.3cm of dots.north, anchor=south]{sigchn}{width=0.2\textwidth}{images/ecg_eg_bare_ch1.pdf}
+\end{scope}
+
+\draw[arrow] (bbox) -- (roi);
+\draw[arrow] (roi) -- (seg);
+\draw[arrow] (seg) -- (sig);
+\draw[arrow] (roi) -- (cls);
+\draw[arrow] ([xshift=0.4cm]raw.north) to[out=30, in=90] ([xshift=-0.4cm]bbox.north east);
+
+\draw[rounded corners] ([shift={(-0.4cm,1.2cm)}]raw.north west) rectangle ([shift={(0.5cm,-0.6cm)}]seg.south east);
+
+\end{tikzpicture}
