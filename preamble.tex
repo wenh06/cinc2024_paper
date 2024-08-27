@@ -1,0 +1,36 @@
+\usepackage[T1]{fontenc}
+\usepackage{mathtools, graphicx, xurl, hyperref}
+% \usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows.meta, decorations.pathmorphing, backgrounds, positioning, fit, calc, hobby, shadows}
+% \tikzexternalize[prefix=tikz/,optimize command away=\includepdf]
+\usepackage{boldline, multirow}
+\usepackage{booktabs} % Allows the use of \toprule, \midrule and \bottomrule in tables
+\usepackage{colortbl}
+\usepackage{subcaption}
+\usepackage{relsize}
+\usepackage[ruled, vlined]{algorithm2e}
+
+% \tikzstyle{smallcircleblock} = [circle, draw, text width = 0.7em, text centered]
+
+% \tikzstyle{wideblock} = [rectangle, draw, text width = 6.5em, text centered, rounded corners, inner sep = 7pt, minimum height = 1.0em]
+
+\newcommand\ImageNode[4][]{
+  \node[#1] (#2) {\includegraphics[#3]{#4}};
+}
+\definecolor{arrowblue}{RGB}{98,145,224}
+
+
+\newcolumntype{g}{>{\columncolor[gray]{0.8}}l}
+
+
+\newif\ifcoloredtext
+\coloredtextfalse
+
+\newif\ifboxednn
+\boxednntrue
+
+
+\newenvironment{indentedquote}[1]%
+{\list{}{\leftmargin=#1\rightmargin=#1}\item[]}%
+{\endlist}

@@ -1,13 +1,17 @@
-\documentclass[%
-  % border={0pt 0pt 0pt 0pt} % left bottom right top
-]{standalone}
+\documentclass{article}
+\usepackage[active,tightpage]{preview}
+\setlength{\PreviewBorder}{3pt}
 
-\usepackage{multirow}
-\usepackage{boldline}
-\usepackage[T1]{fontenc}
+\input{preamble.tex}
 
+\setlength{\textwidth}{27cm}
+
+\PreviewEnvironment[{[]}]{tikzpicture}
 \begin{document}
 
-% \input{tables/final_results_full}
+\begin{figure}
+\centering
+\input{tikz_plots/multi-stage-framework.tex}
+\end{figure}
 
 \end{document}

@@ -3,4 +3,53 @@
 
 % NOT finished
 
+\subsection{Data Prosessing}
+\label{subsec:data_processing}
+
+% almost finished
+
+The Challenge did not provide ECG images directly for method development. Instead, it offered a tool \cite{Shivashankara_2024_ECG} to generate ECG images from ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for our method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
+
+The image generation setup included augmentations such as random Gaussian noise, random color temperature adjustments, and distortions including handwritten notes, wrinkles, and creases. Bounding boxes for the printed ECG waveforms and lead names, along with the plotted pixel coordinates of the ECG waveforms, were recorded in metadata files alongside the generated images. These supplementary data were used to:
+\begin{itemize}
+\item[(1)] Train the object detection model to detect the bounding boxes of the ECG waveforms and lead names in the ECG images, thus identifying the region of interest (ROI) for subsequent ECG signal extraction.
+\item[(2)] Train the segmentation model to digitize the ECG waveforms from the images.
+\end{itemize}
+
+\subsection{The Multi-Stage Framework}
+\label{subsec:multi_stage_framework}
+
+% almost finished
+
+To simultaneously digitize and classify ECG images, we propose a multi-stage framework, as illustrated in Figure \ref{fig:multi-stage-framework}. The framework comprises three deep learning-based modules: object detection, segmentation, and classification.
+
+\begin{figure*}[!t]
+\centering
+\input{tikz_plots/multi-stage-framework.tex}
+\caption{The multi-stage framework for simultaneous digitization and classification of ECG images.}
+\label{fig:multi-stage-framework}
+\end{figure*}
+
+The object detection module identifies the bounding boxes of the ECG waveforms and lead names in the ECG images, thereby determining the region of interest (ROI) for subsequent ECG signal extraction and classification. This module constitutes the first stage of the framework.
+
+The segmentation module extracts a mask of the ECG waveforms from the ROI, which is then transformed into digitized values based on the pixel coordinates of the predicted mask. The bounding boxes obtained from the object detection module are also used to separate the ECG waveforms at different horizontal positions. In cases where the bounding boxes overlap, which commonly occurs when the ECG signals have large amplitudes, we employ a 4-cluster K-means algorithm on the y-coordinates of the predicted mask to locate the isoelectric line of the ECG waveforms and then perform the separation. Concurrently, the classification module predicts the classes of the ECG waveforms from the ROI. These two modules together constitute the second stage of the framework.
+
+\subsection{Model Selection}
+\label{subsec:model_selection}
+
+% NOT finished
+
+We present our criteria for selecting the models for the three modules discussed in Section \ref{subsec:multi_stage_framework}.
+
+\cite{Liu_2022_ConvNeXt}
+
+\cite{carion2020DETR}, \cite{resnet}
+
+\cite{unet}
+
+\subsection{Loss Function}
+\label{subsec:loss_function}
+
+\cite{wolf-etal-2020-transformers}
+
 to write .... \cite{torch_ecg_paper}
