@@ -8,7 +8,7 @@
 
 % almost finished
 
-The Challenge did not provide ECG images directly for method development. Instead, it offered a tool \cite{Shivashankara_2024_ECG} to generate ECG images from ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for our method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
+The Challenge did not provide ECG images directly for method development. Instead, it offered a tool named ECG-Image-Kit \cite{Shivashankara_2024_ECG} to generate ECG images from ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for our method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
 
 The image generation setup included augmentations such as random Gaussian noise, random color temperature adjustments, and distortions including handwritten notes, wrinkles, and creases. Bounding boxes for the printed ECG waveforms and lead names, along with the plotted pixel coordinates of the ECG waveforms, were recorded in metadata files alongside the generated images. These supplementary data were used to:
 \begin{itemize}
@@ -69,7 +69,7 @@ The DETR model achieved a mean average precision (mAP) of $0.90$ and the U-Net m
 \label{fig:data-distribution}
 \end{figure}
 
-Since the data (label) distribution for the classification problem is highly imbalanced as can be observed in Figure \ref{fig:data-distribution}, and also considering that this is a multi-label problem, we adopted the asymmetric loss \cite{ridnik2021asymmetric_loss} as the loss function. The asymmetric loss is defined in Equation \eqref{eq:asymmetric_loss}.
+Given the highly imbalanced data distribution for the classification problem, as illustrated in Figure \ref{fig:data-distribution}, and the multi-label nature of the task, we adopted the asymmetric loss function \cite{ridnik2021asymmetric_loss}. The asymmetric loss is defined in Equation \eqref{eq:asymmetric_loss}.
 \begin{equation}
 \label{eq:asymmetric_loss}
 \begin{array}{ll}
@@ -80,7 +80,7 @@ Since the data (label) distribution for the classification problem is highly imb
 \end{equation}
 where $y$ is the ground truth label, $p$ is the predicted probability, $m$ is the probability margin, and $\gamma_{+}$ and $\gamma_{-}$ are the positive and negative focusing parameters, respectively. The margin $m$ and the focusing parameters $\gamma_{+}$ and $\gamma_{-}$ are hyperparameters that can be tuned. We set $\gamma_{+} = 1,$ $\gamma_{-} = 4,$ and $m = 0.05$ in our experiments.
 
-For the segmentation task, considering that the ECG waveforms occupy only a small portion of the image, we used the binary cross-entropy loss multiplied by a weight mask to balance the loss contribution from different parts of the ECG waveforms. The weight mask is the sum of multiple dilations (for example of iterations $2, 4, 6, 8$) of the binarized ground truth mask. An example of the weight mask is shown in Figure \ref{fig:weight-mask}.
+For the segmentation task, considering that the ECG waveforms occupy only a small portion of the image, we used the binary cross-entropy loss multiplied by a weight mask to balance the loss contribution from different parts of the ECG waveforms. The weight mask is the sum of multiple dilations (for example, dilation iterations 2, 4, 6, and 8) of the binarized ground truth mask. An example of the weight mask is shown in Figure \ref{fig:weight-mask}.
 
 \begin{figure}[!htp]
 \centering
@@ -89,4 +89,9 @@ For the segmentation task, considering that the ECG waveforms occupy only a smal
 \label{fig:weight-mask}
 \end{figure}
 
-For the object detection task, we used the standard DETR loss function, which is a linear combination of the cross-entropy loss of the bounding box class predictions (coefficient $1$) and the bounding box coordinate regression loss ($L1$ loss with coefficient $5$ and generalized IoU loss with coefficient $2$).
+For the object detection task, we used the standard DETR loss function, which is a linear combination of the cross-entropy loss for the bounding box class predictions (with a coefficient of 1) and the bounding box coordinate regression loss (L1 loss with a coefficient of 5 and generalized IoU loss with a coefficient of 2).
+
+% \subsection{Training Details}
+% \label{subsec:training_details}
+
+% % NOT finished
