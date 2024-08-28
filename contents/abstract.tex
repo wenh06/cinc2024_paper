@@ -4,9 +4,9 @@
 
 Aim: This paper addresses the challenge of simultaneous digitization and arrhythmia classification of electrocardiograms (ECGs) captured from images, as presented by the George B. Moody PhysioNet Challenge 2024.
 
-Methods: We propose a multi-stage framework to digitize and classify ECG images concurrently. The framework consists of 3 modules: (1) Region of Interest (ROI) extraction, (2) Arrhythmia classification, and (3) ECG waveform digitization. The ROI extraction module uses a DETR model with a ResNet-50 backbone to locate the ECG region. The classification module uses a light-weight ConvNeXt model to classify the ECG signal. The digitization module uses a U-Net model to extract the ECG waveform from the ROI. The digitization task involves a highly unbalanced segmentation problem, where the ECG waveforms occupy a small portion of the image. We propose a novel loss function to address this issue.
+Methods: We propose a multi-stage framework to digitize and classify ECG images concurrently. The framework consists of 3 modules: (1) Region of Interest (ROI) extraction, (2) Arrhythmia classification, and (3) ECG waveform digitization. The ROI extraction module uses a DETR model with a ResNet-50 backbone to locate the ECG region. The classification module uses a lightweight ConvNeXt model to classify the ECG signal. The digitization module uses a U-Net model to extract the ECG waveform from the ROI. The digitization task involves a highly unbalanced segmentation problem, where the ECG waveforms occupy a small portion of the image. We propose a novel loss function to address this issue.
 
-Results: Our team (``Revenger'') achieved a score of 0.33 for the classification problem on the hidden validation set, ranked 41/90; and signal-to-noise ratio (SNR) of -0.733 for the digitization problem, ranked 47/84.
+Results: Our team (``Revenger'') received a score of 0.33 for the classification problem on the hidden validation set, ranked 41/90; and a signal-to-noise ratio (SNR) of -0.733 for the digitization problem, ranked 47/84.
 
 Conclusion: The proposed framework demonstrates the feasibility of digitizing and classifying ECG images concurrently, but needs further improvement to achieve better performance.
 
