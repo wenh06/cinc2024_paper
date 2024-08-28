@@ -1,5 +1,5 @@
-# ignore svg, txt, json, html, bib files
-exclude: '^.*\.(svg|txt|json|html|bib)$'
+# ignore svg, txt, json, html, bib, doc, docx, xls, xlsx, ppt, pptx, pdf, jpg, png, gif, tif, tiff, eps, ps, bmp
+exclude: '^.*\.(svg|txt|json|html|bib|doc|docx|xls|xlsx|ppt|pptx|pdf|jpg|png|gif|tif|tiff|eps|ps|bmp)$'
 fail_fast: false
 
 repos:
