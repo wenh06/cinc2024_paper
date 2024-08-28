@@ -90,7 +90,7 @@ def main():
         handout = False
     else:
         raise RuntimeError("Usage: python compile.py [tex_entry_file] [output_file_name]")
-    
+
     if len(sys.argv) == 3:
         output_file_name = sys.argv[2]
         if not Path(output_file_name).suffix == ".pdf":
