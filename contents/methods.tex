@@ -18,6 +18,9 @@ The image generation setup included augmentations such as random Gaussian noise,
 
 The PTB-XL dataset assigned a ``strat\_fold'' property (with values 1-10) to each record, which we used to split the dataset into training, and validation sets. The validation set has ``strat\_fold'' values 10, as recommended by the PTB-XL dataset, serving for model selection and hyperparameter tuning. The training set comprises the remaining records.
 
+\newif\ifFrameworkFigBox
+\FrameworkFigBoxtrue
+
 \begin{figure*}[!ht]
 \centering
 \input{tikz_plots/multi-stage-framework.tex}

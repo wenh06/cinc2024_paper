@@ -28,6 +28,8 @@ arrow/.style={
 \draw[arrow] (roi) -- (cls);
 \draw[arrow] ([xshift=0.4cm]raw.north) to[out=30, in=90] ([xshift=-0.4cm]bbox.north east);
 
+\ifFrameworkFigBox
 \draw[rounded corners] ([shift={(-0.4cm,1.2cm)}]raw.north west) rectangle ([shift={(0.5cm,-0.6cm)}]seg.south east);
+\fi
 
 \end{tikzpicture}
