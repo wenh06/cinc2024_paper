@@ -124,7 +124,7 @@ $^2${\it College of Science, China Agricultural University} \\
 \headerbox{Main Model: TiCRNN}{name=nn, column=0, span=1, row=1, below=introduction}{
 % finished
 
-\input{plot_figures/model_arch}
+% \input{plot_figures/model_arch}
 
 % \vspace{-0.3cm}
 
@@ -138,7 +138,7 @@ We used a {\color{red}T}ime-{\color{red}i}ncremental {\color{red}C}onvolutional 
 \headerbox{Neural Network Backbone}{name=backbone, column=1, span=2, row=1, below=introduction}{
 % finished
 
-\input{plot_figures/se_bottleneck}%
+% \input{plot_figures/se_bottleneck}%
 \begin{tikzpicture}
 \node [rectangle, text width = 20em, inner sep = 2pt, minimum height = 1.0em] {The neural network backbone is a convolutional network whose building blocks are {\color{red}SE-Bottleneck} blocks. The mainstream in the dashed box consists of 3 convolutional blocks (actually compositions of convolution, batch normalization, and activation) followed by an SE block. The channels $n_1, n_2$ are typically several times of $m,$ hence giving the name ``bottleneck''. The shortcut is typically convolutions of kernel size 1, whose stride and input/output channels match the mainstream.};
 \end{tikzpicture}
@@ -188,7 +188,7 @@ We used a {\color{red}T}ime-{\color{red}i}ncremental {\color{red}C}onvolutional 
 \headerbox{Importance of Rescaling}{name=rescale, span=1, column=2, below=data}{
 % finished
 
-\includegraphics[width=\linewidth]{images/train_scores_compare.pdf}
+% \includegraphics[width=\linewidth]{images/train_scores_compare.pdf}
 
 Mean curves of challenge scores on the training set. Shaded areas are error bounds.
 
