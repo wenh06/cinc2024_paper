@@ -99,34 +99,22 @@ $^2${\it College of Science, China Agricultural University} \\
 %----------------------------------------------------------------------------------------
 
 \headerbox{Introduction}{name=introduction, column=0, row=0, span=3}{
-% NOT finished
+% finished
 
 \begin{itemize}
-\item to write
+\item We propose a \textbf{multi-stage framework} to digitize and classify ECG images concurrently. The framework consists of 3 modules: (1) Region of Interest (ROI) extraction, (2) Arrhythmia classification, and (3) ECG waveform digitization
 \vspace{-0.2cm}
-\item to write
+\item The ROI extraction module uses a DETR model with a ResNet-50 backbone to locate the ECG region. The classification module uses a lightweight ConvNeXt model to classify the ECG signal. The digitization module uses a U-Net model to extract the ECG waveform from the ROI.
 \vspace{-0.2cm}
-\item to write
+\item The digitization task involves a highly unbalanced segmentation problem, where the ECG waveforms occupy a small portion of the image. We propose a novel loss function to address this issue.
 \end{itemize}
-}
-
-
-%----------------------------------------------------------------------------------------
-%	Model selection
-%----------------------------------------------------------------------------------------
-
-\headerbox{Model Selection}{name=nn, column=2, span=1, row=1, below=introduction}{
-% NOT finished
-
-to write
-
 }
 
 %----------------------------------------------------------------------------------------
 %	Framework
 %----------------------------------------------------------------------------------------
 
-\headerbox{The Multi-Stage Framework}{name=framework, column=0, span=2, row=1, below=introduction}{
+\headerbox{The Multi-Stage Framework}{name=framework, column=0, span=3, row=1, below=introduction}{
 % finished
 
 \newif\ifFrameworkFigBox
@@ -142,19 +130,30 @@ to write
 %	Preprocessing
 %----------------------------------------------------------------------------------------
 
-\headerbox{Training Data Preparation}{name=data, column=2, row=1, span=1, below=framework}{
+\headerbox{Training Data Preparation}{name=data, column=0, row=1, span=2, below=framework}{
+% finished
+
+\begin{itemize}
+\item ECG-Image-Kit to generate ECG images from the PTB-XL dataset for our method development. Additionally, the PTB-XL+ dataset was used to generate classification labels.
+\vspace{-0.2cm}
+\item Image generation setup included augmentations such as random Gaussian noise, random color temperature adjustments, and distortions including handwritten notes, wrinkles, and creases.
+\vspace{-0.2cm}
+\item Bounding boxes for the printed waveforms and lead names, along with the plotted pixel coordinates of the waveforms, were recorded in metadata files alongside the generated images to train object detection models and segmentation models respectively.
+\end{itemize}
+
+}
+
+
+%----------------------------------------------------------------------------------------
+%	Model selection
+%----------------------------------------------------------------------------------------
+
+\headerbox{Model Selection}{name=nn, column=2, span=1, row = 2, below=framework}{
 % NOT finished
 
-% \begin{itemize}
-% \item Select at most one 5-minute window from each recording by offline-computed SQI.
-% \vspace{-0.2cm}
-% \item Butterworth bandpass filtering of order 4 and cutoff frequencies 0.5 - 30 Hz.
-% \vspace{-0.2cm}
-% \item Resampling to 100 Hz using polyphase filtering.
-% \vspace{-0.2cm}
-% \item Rescaling (Z-score normalization) to zero mean and unit variance.
-% \end{itemize}
-to write
+\input{tables/model_select_poster}
+
+Models are chosen based on performance, efficiency, and compatibility with ECG image data.
 
 }
 
@@ -162,7 +161,7 @@ to write
 %	Training Setups
 %----------------------------------------------------------------------------------------
 
-\headerbox{Training Strategies}{name=training, span=1, column=0, row=1, below=framework}{
+% \headerbox{Training Strategies}{name=training, span=1, column=2, row=1, below=framework}{
 % finished
 
 % \begin{itemize}
@@ -174,14 +173,14 @@ to write
 % \vspace{-0.2cm}
 % \item Input length 180s, randomly sliced from one recording and reloads every 5 epochs.
 % \end{itemize}
-to write
-}
+% to write
+% }
 
 %----------------------------------------------------------------------------------------
 %	Submission Results
 %----------------------------------------------------------------------------------------
 
-\headerbox{Submission Results}{name=submission, span=2, column=0, below=training}{
+\headerbox{Submission Results}{name=submission, span=2, column=0, below=data}{
 % NOT finished
 % TODO: update the scores on the training and cross-val sets
 
@@ -209,7 +208,7 @@ to write
 % \item Scores on the train and cross-validation sets are of the form $mean \pm std. dev.$ from all our offline experiments with z-score normalization included in the preprocessing pipeline.
 % \end{itemize}
 
-to write
+\input{tables/final_results}
 
 }
 
@@ -220,7 +219,21 @@ to write
 \headerbox{Discussions and Limitations}{name=discussion, column=0, below=submission, span=3}{
 % NOT finished
 
-to write
+\begin{itemize}
+\item The proposed method is relatively effective in digitizing and classifying ECG images concurrently, achieving an acceptable SNR and F1 score. This multi-stage framework offers a lightweight and efficient solution to this challenge.
+\vspace{-0.2cm}
+\item There are observable gaps between the SNR metric on the public training data and the hidden validation/test data. A possible reason for this discrepancy is the difference in data distribution (format): training data generated using ECG-Image-Kit all follow the standard 3-by-4 format. The post-processing step after segmentation is designed to handle this specific format. However, the hidden validation/test data may have different formats, e.g. additional full-length waveforms.
+\vspace{-0.2cm}
+\item Further improvement directions:
+\vspace{-0.2cm}
+\begin{itemize}
+    \item More effective backbone networks or more advanced architectures, including the latest YOLO series models.
+    \vspace{-0.1cm}
+    \item End-to-end digitization models from the segmented ECG waveform masks or even directly from the ROI can be developed to simplify the pipeline, replacing the current rule-based conversion from pixel coordinates to digitized value.
+    \vspace{-0.1cm}
+    \item Better handling of rotated ECG images to improve the framework's robustness, using oriented object detection models.
+\end{itemize}
+\end{itemize}
 
 }
 

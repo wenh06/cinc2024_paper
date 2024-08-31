@@ -16,11 +16,14 @@ arrow/.style={
 \node[above=of seg] (sig) {\textbf{Digitized 12-Lead Signal}};
 \node[above=of roi] (cls) {\textbf{Predicted Classes}};
 \ImageNode[above=0.1cm of sig]{sigch0}{width=0.2\textwidth}{images/ecg_eg_bare_ch0.pdf}
-\begin{scope}[on background layer]
-% \ImageNode[above right = 0.3cm and 0.3cm of sigch0.south west, anchor = south west]{sigch1}{width=0.2\textwidth}{images/ecg_eg_bare_ch1.pdf}
-\node[rotate=45, above right=-0.4cm and 0.1cm of sigch0.north] (dots) {\huge $\cdots$};
-\ImageNode[above right=-0.05cm and 0.3cm of dots.north, anchor=south]{sigchn}{width=0.2\textwidth}{images/ecg_eg_bare_ch1.pdf}
-\end{scope}
+
+% \begin{scope}[on background layer]
+% \node[rotate=45, above right=-0.4cm and 0.1cm of sigch0.north] (dots) {\huge $\cdots$};
+% \ImageNode[above right=-0.05cm and 0.3cm of dots.north, anchor=south]{sigchn}{width=0.2\textwidth}{images/ecg_eg_bare_ch1.pdf}
+% \end{scope}
+
+\node[rotate=45, above right=0.15cm and 0.1cm of sigch0.north, anchor=south] (dots) {\huge $\cdots$};
+\ImageNode[above right=0.15cm and 0.3cm of dots.north, anchor=south]{sigchn}{width=0.2\textwidth}{images/ecg_eg_bare_ch1.pdf}
 
 \draw[arrow] (bbox) -- (roi);
 \draw[arrow] (roi) -- (seg);

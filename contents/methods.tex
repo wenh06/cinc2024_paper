@@ -52,11 +52,21 @@ We present our criteria for selecting the deep learning models for the three mod
 \end{itemize}
 The object detection model and the classification model are trained from a pre-trained model loaded from Huggingface's model hub \cite{wolf-etal-2020-transformers}, while the segmentation model is trained from scratch. The models are implemented and trained using the ``torch\_ecg'' library \cite{torch_ecg_paper}. The sizes in terms of the number of trainable parameters of the selected models are listed in Table \ref{tab:model_num_params}.
 
+\begin{table}[!htp]
+\centering
 \input{tables/model_num_params.tex}
+\caption{Number of trainable parameters in the models.}
+\label{tab:model_num_params}
+\end{table}
 
 It is important to note that for the classification model, using an oversized model may not improve the performance and can even degrade it due to overfitting. Therefore, we opted for a lightweight model to balance performance and efficiency. The evaluation metrics (in terms of F1 score) of different sizes of ConvNeXt models on the left-out validation set, along with their number of trainable parameters, are presented in Table \ref{tab:clf_selection}.
 
+\begin{table}[!htp]
+\centering
 \input{tables/classifier_selection.tex}
+\caption{Evaluation metrics of ConvNeXt models of different sizes. The values are F1 scores on the left-out validation set. The threshold refers to the probability threshold for the multi-label predictions. ``head only'' refers to the model with backbone weights frozen. The last row shows the number of trainable parameters in each model.}
+\label{tab:clf_selection}
+\end{table}
 
 The DETR model achieved a mean average precision (mAP) of $0.90$ and the U-Net model achieved a Dice coefficient of $0.73,$ both on the left-out validation set.
 
