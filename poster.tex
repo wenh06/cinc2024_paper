@@ -154,61 +154,41 @@ $^2${\it College of Science, China Agricultural University} \\
 \input{tables/model_select_poster}
 
 Models are chosen based on performance, efficiency, and compatibility with ECG image data.
+\newline
+\faHandPointRight[regular] DETR: 0.9 mAP \hfill \faHandPointRight[regular] U-Net: 0.73 Dice.
+\newline
+\faHandPointRight[regular] Total inference time: 2s on single RTX 3090
 
 }
 
 %----------------------------------------------------------------------------------------
-%	Training Setups
+%	Novel loss functions
 %----------------------------------------------------------------------------------------
 
-% \headerbox{Training Strategies}{name=training, span=1, column=2, row=1, below=framework}{
+\headerbox{Loss Functions}{name=loss, span=2, column=0, below=data}{
 % finished
 
-% \begin{itemize}
-% \item Optimizer: AMSGrad variant of AdamW with OneCycleLR scheduler.
-% \vspace{-0.2cm}
-% \item Stratified train-validation split (split among patients): 80 \% -- 20 \%.
-% \vspace{-0.2cm}
-% \item Batch size 32; epoch number $\leq 55$ with early stopping patience 25 epochs.
-% \vspace{-0.2cm}
-% \item Input length 180s, randomly sliced from one recording and reloads every 5 epochs.
-% \end{itemize}
-% to write
-% }
+\begin{tikzpicture}
+\ImageNode[]{wtmask}{width=0.4\linewidth}{images/weight-mask.pdf}
+\node [rectangle, text width = 8.8cm, inner sep = 2pt, minimum height = 1.0em, right=0.3cm of wtmask.north east, anchor=north west] {\faHandPointRight[regular] Segmentation: Since ECG waveforms occupy only a small portion of the image, we used the BCE loss multiplied by a \textbf{\color{red} weight mask} to balance the loss contribution from different parts of the ECG waveforms. The weight mask is the sum of multiple dilations (e.g., dilation iterations 2, 4, 6, and 8) of the binarized ground truth mask. On the left is an example of a weight mask.};
+\end{tikzpicture}
+\faHandPointRight[regular] Classification: Asymmetric loss $L = -y \cdot (1-p)^{\gamma_{+}} \log(p) - (1-y) \cdot (p_m)^{\gamma_{-}} \log(1-p_m)$
+\newline
+\faHandPointRight[regular] Object detection: 1 $\times$ bbox class cross-entropy + 5 $\times$ bbox coordinate L1 loss + 2 $\times$ GIoU loss
+
+}
 
 %----------------------------------------------------------------------------------------
 %	Submission Results
 %----------------------------------------------------------------------------------------
 
-\headerbox{Submission Results}{name=submission, span=2, column=0, below=data}{
+\headerbox{Submission Results}{name=submission, span=1, column=2, below=nn}{
 % NOT finished
-% TODO: update the scores on the training and cross-val sets
 
-% \renewcommand{\arraystretch}{1.25}
-% \begin{center}
-% % requires packages boldline, multirow
-% \setlength\tabcolsep{4pt}
-% % \begin{tabular}{@{\extracolsep{6pt}}c|c|c|c|c@{}}
-% \begin{tabular}{c|c|c|c|c}
-% \hlineB{3.5}
-% & \multicolumn{4}{c}{\textbf{Challenge Scores}} \\ \cline{2-5}
-% & \textbf{72 hours} & 12 hours & 24 hours & 48 hours \\ \hline
-% Training & 0.814 $\pm$ 0.070 & - & - & - \\
-% Cross-validation & 0.424 $\pm$ 0.026 & - & - & - \\ \hline
-% Hidden validation & \textbf{0.701} & 0.33 & 0.40 & \textbf{0.75} \\
-% Ranking & \textbf{5 / 270} & - & - & - \\
-% \hlineB{3.5}
-% \end{tabular}
-% \end{center}
-% \renewcommand{\arraystretch}{1}
-
-% \begin{itemize}
-% \item Challenge score and ranking evaluated on the hidden validation set, scores on its truncated 12h / 24h / 48h subsets, and scores on the training and cross-validation sets.
-% \vspace{-0.2cm}
-% \item Scores on the train and cross-validation sets are of the form $mean \pm std. dev.$ from all our offline experiments with z-score normalization included in the preprocessing pipeline.
-% \end{itemize}
-
-\input{tables/final_results}
+\begin{center}
+\input{tables/final_results_simple}
+\end{center}
+The rankings are based on the hidden validation set. Results on the public training data (more specifically, the left-out validation set) are also provided for reference.
 
 }
 
@@ -216,7 +196,7 @@ Models are chosen based on performance, efficiency, and compatibility with ECG i
 %	Limitations, Discussions
 %----------------------------------------------------------------------------------------
 
-\headerbox{Discussions and Limitations}{name=discussion, column=0, below=submission, span=3}{
+\headerbox{Discussions and Limitations}{name=discussion, column=0, below=loss, span=3}{
 % NOT finished
 
 \begin{itemize}
@@ -255,7 +235,7 @@ We thank professor {\bf Deren Han} from the School of Mathematical Sciences, Bei
 
 \headerbox{}{name=foottext, column=0, span=3, below=acknowledgements, textborder=none, headerborder=none,  boxheaderheight=0pt}{
 % finished
-\hfill \small \textit{Code, configs, etc. available at https://github.com/wenh06/cinc2024, and based on https://github.com/DeepPSP/torch\_ecg.}
+\hfill \small \textit{Code, configs, etc. are available at https://github.com/wenh06/cinc2024, and is based on https://github.com/DeepPSP/torch\_ecg.}
 }
 
 
