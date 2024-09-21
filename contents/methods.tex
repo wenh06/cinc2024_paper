@@ -8,7 +8,7 @@
 
 % almost finished
 
-The Challenge did not provide ECG images directly for method development. Instead, it offered a tool named ECG-Image-Kit \cite{Shivashankara_2024_ECG} to generate ECG images from ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for our method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
+The Challenge did not provide any ECG images directly for method development. Instead, it offered a tool named ECG-Image-Kit \cite{Shivashankara_2024_ECG} to generate ECG images from digital ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
 
 The image generation setup included augmentations such as random Gaussian noise, random color temperature adjustments, and distortions including handwritten notes, wrinkles, and creases. Bounding boxes for the printed ECG waveforms and lead names, along with the plotted pixel coordinates of the ECG waveforms, were recorded in metadata files alongside the generated images. These supplementary data were used to:
 \begin{itemize}
@@ -33,7 +33,7 @@ The PTB-XL dataset assigned a ``strat\_fold'' property (with values 1-10) to eac
 
 % almost finished
 
-To simultaneously digitize and classify ECG images, we propose a multi-stage framework, as illustrated in Figure \ref{fig:multi-stage-framework}. The framework comprises three deep learning-based modules: object detection, segmentation, and classification.
+To simultaneously digitize and classify ECG images, we designed a multi-stage framework, as shown in Figure \ref{fig:multi-stage-framework}. The framework comprises three deep learning-based modules: object detection, segmentation, and classification.
 
 The object detection module identifies the bounding boxes of the ECG waveforms and lead names in the ECG images, thereby determining the region of interest (ROI) for subsequent ECG signal extraction and classification. This module constitutes the first stage of the framework.
 
