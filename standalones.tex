@@ -2,19 +2,27 @@
 \usepackage[active,tightpage]{preview}
 \setlength{\PreviewBorder}{3pt}
 
-\input{preamble.tex}
+\input{preamble}
 
 \setlength{\textwidth}{27cm}
 
-\PreviewEnvironment[{[]}]{tikzpicture}
+% \PreviewEnvironment[{[]}]{tikzpicture}
+% \begin{document}
+
+% \newif\ifFrameworkFigBox
+% \FrameworkFigBoxtrue
+
+% \begin{figure}
+% \centering
+% \input{tikz_plots/multi-stage-framework.tex}
+% \end{figure}
+
+\PreviewEnvironment[{[]}]{tabular}
 \begin{document}
 
-\newif\ifFrameworkFigBox
-\FrameworkFigBoxtrue
-
-\begin{figure}
+\begin{table}
 \centering
-\input{tikz_plots/multi-stage-framework.tex}
-\end{figure}
+\input{tables/final_results_full}
+\end{table}
 
 \end{document}
