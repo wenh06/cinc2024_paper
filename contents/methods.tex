@@ -3,20 +3,18 @@
 
 % almost finished
 
-\subsection{Data Prosessing}
+\subsection{Data Processing}
 \label{subsec:data_processing}
 
 % almost finished
 
-The Challenge did not provide any ECG images directly for method development. Instead, it offered a tool named ECG-Image-Kit \cite{Shivashankara_2024_ECG} to generate ECG images from digital ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
+The Challenge did not provide any ECG images directly for method development. Instead, it offered a tool named ECG-Image-Kit \cite{Shivashankara_2024_ECG, ECGImageKit2024_GitHub} to generate ECG images from digital ECG signals. We utilized this tool on the PTB-XL dataset \cite{wagner2020ptb_xl} and generated a total of 21,799 synthetic ECG images for method development. Additionally, the PTB-XL+ dataset \cite{Strodthoff_2023} was used to generate classification labels for the ECG images.
 
-The image generation setup included augmentations such as random Gaussian noise, random color temperature adjustments, and distortions including handwritten notes, wrinkles, and creases. Bounding boxes for the printed ECG waveforms and lead names, along with the plotted pixel coordinates of the ECG waveforms, were recorded in metadata files alongside the generated images. These supplementary data were used to:
+The image generation setup included augmentations such as random Gaussian noise (zero mean and standard deviation randomly chosen within 1 - 50), random color temperature (2000 - 4000 or 10000 - 20000) adjustments, and distortions including handwritten notes, wrinkles, and creases, all conducted independently randomly with 50 \% probability. Rotation augmentation was excluded from the generation setup since the Challenge mainly focuses on ``normal'' ECG images. Bounding boxes for the printed ECG waveforms, lead names, and plotted pixel coordinates of the ECG waveforms were recorded in metadata files alongside the generated images. These supplementary data were used to:
 \begin{itemize}
 \item[(1)] Train the object detection model to detect the bounding boxes of the ECG waveforms and lead names in the ECG images, thus identifying the region of interest (ROI) for subsequent ECG signal extraction.
 \item[(2)] Train the segmentation model to digitize the ECG waveforms from the images.
 \end{itemize}
-
-The PTB-XL dataset assigned a ``strat\_fold'' property (with values 1-10) to each record, which we used to split the dataset into training, and validation sets. The validation set has ``strat\_fold'' values 10, as recommended by the PTB-XL dataset, serving for model selection and hyperparameter tuning. The training set comprises the remaining records.
 
 \newif\ifFrameworkFigBox
 \FrameworkFigBoxtrue
@@ -27,6 +25,8 @@ The PTB-XL dataset assigned a ``strat\_fold'' property (with values 1-10) to eac
 \caption{The multi-stage framework for simultaneous digitization and classification of ECG images.}
 \label{fig:multi-stage-framework}
 \end{figure*}
+
+The PTB-XL dataset assigned a ``strat\_fold'' property (with values 1-10) to each recording, which we used to split the dataset into training, and validation sets. The validation set has ``strat\_fold'' values 10, as recommended by the PTB-XL dataset, serving for model selection and hyperparameter tuning. The training set comprises the remaining recordings.
 
 \subsection{The Multi-Stage Framework}
 \label{subsec:multi_stage_framework}
@@ -46,11 +46,11 @@ The segmentation module extracts a mask of the ECG waveforms from the ROI, which
 
 We present our criteria for selecting the deep learning models for the three modules discussed in Section \ref{subsec:multi_stage_framework}. The models are chosen based on their performance, efficiency, and compatibility with ECG image data. After evaluating several models, we choose the following models for the three modules:
 \begin{itemize}
-\item[(1)] Object Detection: A DETR model \cite{carion2020DETR} with a ResNet-50 backbone \cite{resnet}.
-\item[(2)] Classification: A lightweight ConvNeXt model \cite{Liu_2022_ConvNeXt} of ``nano'' size.
+\item[(1)] Object Detection: A DETR model \cite{carion2020DETR} with a ResNet-50 \cite{resnet} backbone.
+\item[(2)] Classification: A ``nano'' size ConvNeXt model \cite{Liu_2022_ConvNeXt}.
 \item[(3)] Segmentation: A U-Net model \cite{unet}.
 \end{itemize}
-The object detection model and the classification model are trained from a pre-trained model loaded from Huggingface's model hub \cite{wolf-etal-2020-transformers}, while the segmentation model is trained from scratch. The models are implemented and trained using the ``torch\_ecg'' library \cite{torch_ecg_paper}. The sizes in terms of the number of trainable parameters of the selected models are listed in Table \ref{tab:model_num_params}.
+The object detection and classification models are trained from pre-trained models loaded from Huggingface's model hub \cite{wolf-etal-2020-transformers}, while the segmentation model is trained from scratch. The models are implemented and trained using the ``torch\_ecg'' library \cite{torch_ecg_paper}. The sizes in terms of the number of trainable parameters of the models are listed in Table \ref{tab:model_num_params}.
 
 \begin{table}[!htp]
 \centering
@@ -59,7 +59,7 @@ The object detection model and the classification model are trained from a pre-t
 \label{tab:model_num_params}
 \end{table}
 
-It is important to note that for the classification model, using an oversized model may not improve the performance and can even degrade it due to overfitting. Therefore, we opted for a lightweight model to balance performance and efficiency. The evaluation metrics (in terms of F1 score) of different sizes of ConvNeXt models on the left-out validation set, along with their number of trainable parameters, are presented in Table \ref{tab:clf_selection}.
+For classification, using an oversized model may not improve the performance and can even degrade it due to overfitting. Therefore, we opted for a lightweight model to balance performance and efficiency. The evaluation metrics (in terms of F1 score) of different sizes of ConvNeXt models on the left-out validation set, along with their number of trainable parameters, are presented in Table \ref{tab:clf_selection}.
 
 \begin{table}[!htp]
 \centering
@@ -82,7 +82,7 @@ The DETR model achieved a mean average precision (mAP) of $0.90$ and the U-Net m
 \label{fig:data-distribution}
 \end{figure}
 
-Given the highly imbalanced data distribution for the classification problem, as illustrated in Figure \ref{fig:data-distribution}, and the multi-label nature of the task, we adopted the asymmetric loss function \cite{ridnik2021asymmetric_loss}. The asymmetric loss is defined in Equation \eqref{eq:asymmetric_loss}.
+Given the highly imbalanced data distribution for the classification problem, as illustrated in Figure \ref{fig:data-distribution}, and the multi-label nature of the task, we adopted the asymmetric loss function \cite{ridnik2021asymmetric_loss}, as defined in Equation \eqref{eq:asymmetric_loss}.
 \begin{equation}
 \label{eq:asymmetric_loss}
 \begin{array}{ll}
@@ -97,7 +97,7 @@ For the segmentation task, considering that the ECG waveforms occupy only a smal
 
 \begin{figure}[!htp]
 \centering
-\includegraphics[width=\linewidth]{images/weight-mask.pdf}
+\includegraphics[width=0.85\linewidth]{images/weight-mask.pdf}
 \caption{An example of the weight mask for the segmentation loss function.}
 \label{fig:weight-mask}
 \end{figure}
