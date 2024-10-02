@@ -1,10 +1,20 @@
 % requires packages boldline, multirow
 \setlength\tabcolsep{6pt}
-\begin{tabular}{@{\extracolsep{2pt}}c|ccc@{}}
+% \begin{tabular}{@{\extracolsep{2pt}}c|ccc@{}}
+% \hlineB{3.5}
+% & Training & Hidden & Ranking \\
+% \hlineB{2}
+% F1 Score & $0.45$ & $0.33$ & $9/16$ \\
+% SNR & $1.21$ & $-0.733$ & $13/16$ \\
+% \hlineB{3.5}
+% \end{tabular}
+
+\begin{tabular}{@{\extracolsep{2pt}}|c|c|c|@{}}
 \hlineB{3.5}
-& Training & Hidden & Ranking \\
+Task & Score & Rank \\
 \hlineB{2}
-F1 Score & $0.45$ & $0.33$ & $9/16$ \\
-SNR & $1.21$ & $-0.733$ & $13/16$ \\
+Classification & F-measure: $0.33$ & $9/16$ \\
+\hlineB{2}
+Digitization & SNR: $-0.733$ & $13/16$ \\
 \hlineB{3.5}
 \end{tabular}
