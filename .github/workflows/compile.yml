@@ -25,7 +25,7 @@ jobs:
     # Don't run on forked repos.
     if: contains(fromJson('["wenh06"]'), github.repository_owner)
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     strategy:
       matrix:
         python-version: ["3.9"]
@@ -58,10 +58,12 @@ jobs:
     - name: Setup TeX Live
       uses: teatimeguest/setup-texlive-action@v3
       with:
-        # version: 2020
+        # version: 2024
         # List of TeXLive-packages contained in the scheme-small
         # https://trac.macports.org/wiki/TeXLivePackages
         # tlmgr info --list scheme-small
+        # packages: >-
+        #   scheme-full
         packages: >-
           scheme-small
           rerunfilecheck
@@ -244,13 +246,33 @@ jobs:
           xpatch
           footmisc
           lm
+          wrapfig
+          helvet
+          dvips
+          urw
     - name: Install latexmk and extra software
       run: |
-        sudo apt install latexmk -y
-        sudo apt install texlive-pictures texlive-latex-extra texlive-fonts-recommended pdf2svg -y
-        # sudo tlmgr install collection-fontsrecommended
+        sudo apt install -y latexmk \
+            texlive-pictures \
+            texlive-latex-extra \
+            texlive-fonts-recommended \
+            texlive-fonts-extra \
+            pdf2svg
+
+        sudo apt-get install -y \
+            ghostscript \
+            gsfonts \
+            texlive-pstricks
+
         echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-        sudo apt-get install ttf-mscorefonts-installer
+        sudo apt-get install -y ttf-mscorefonts-installer
+
+        sudo mktexlsr
+        sudo updmap-sys
+        sudo fc-cache -fv
+    - name: Debug font maps
+      run: |
+        kpsewhich psfonts.map
     - name: Compile the document
       run: |
         python compile.py
@@ -268,7 +290,7 @@ jobs:
   github-release:
     # github release and changelog
     needs: compile
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     if: startsWith(github.ref, 'refs/tags/')
     steps:
       - name: Checkout
