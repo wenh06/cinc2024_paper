@@ -25,7 +25,17 @@
 
 \usepackage{textcomp}
 \usepackage{eso-pic}
+\usepackage{enumitem}
 \usepackage{hyperref}
+
+\setlist[itemize]{
+  itemsep=1.5pt,
+  topsep=3pt,
+  parsep=0pt,
+  partopsep=0pt,
+  leftmargin=1em,
+  labelsep=0.4em
+}
 
 \graphicspath{{images/}} % Directory in which figures are stored
 
@@ -110,9 +120,9 @@ $^2${\it College of Science, China Agricultural University} \\
 
 \begin{itemize}
 \item We propose a \textbf{multi-stage framework} to digitize and classify ECG images concurrently. The framework consists of 3 modules: (1) Region of Interest (ROI) extraction, (2) Arrhythmia classification, and (3) ECG waveform digitization
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \item The ROI extraction module uses a DETR model with a ResNet-50 backbone to locate the ECG region. The classification module uses a lightweight ConvNeXt model to classify the ECG signal. The digitization module uses a U-Net model to extract the ECG waveform from the ROI.
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \item The digitization task involves a highly unbalanced segmentation problem, where the ECG waveforms occupy a small portion of the image. We propose a novel loss function to address this issue.
 \end{itemize}
 }
@@ -142,9 +152,9 @@ $^2${\it College of Science, China Agricultural University} \\
 
 \begin{itemize}
 \item ECG-Image-Kit to generate ECG images from the PTB-XL dataset for our method development. Additionally, the PTB-XL+ dataset was used to generate classification labels.
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \item Image generation setup included augmentations such as random Gaussian noise, random color temperature adjustments, and distortions including handwritten notes, wrinkles, and creases.
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \item Bounding boxes for the printed waveforms and lead names, along with the plotted pixel coordinates of the waveforms, were recorded in metadata files alongside the generated images to train object detection models and segmentation models respectively.
 \end{itemize}
 
@@ -208,17 +218,17 @@ The rankings are based on the hidden validation set. Results on the public train
 
 \begin{itemize}
 \item The proposed method is relatively effective in digitizing and classifying ECG images concurrently, achieving an acceptable SNR and F1 score. This multi-stage framework offers a lightweight and efficient solution to this challenge.
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \item There are observable gaps between the SNR metric on the public training data and the hidden validation/test data. A possible reason for this discrepancy is the difference in data distribution (format): training data generated using ECG-Image-Kit all follow the standard 3-by-4 format. The post-processing step after segmentation is designed to handle this specific format. However, the hidden validation/test data may have different formats, e.g. additional full-length waveforms.
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \item Further improvement directions:
-\vspace{-0.2cm}
+% \vspace{-0.2cm}
 \begin{itemize}
-    \item More effective backbone networks or more advanced architectures, including the latest YOLO series models.
-    \vspace{-0.1cm}
-    \item End-to-end digitization models from the segmented ECG waveform masks or even directly from the ROI can be developed to simplify the pipeline, replacing the current rule-based conversion from pixel coordinates to digitized value.
-    \vspace{-0.1cm}
-    \item Better handling of rotated ECG images to improve the framework's robustness, using oriented object detection models.
+\item More effective backbone networks or more advanced architectures, including the latest YOLO series models.
+% \vspace{-0.1cm}
+\item End-to-end digitization models from the segmented ECG waveform masks or even directly from the ROI can be developed to simplify the pipeline, replacing the current rule-based conversion from pixel coordinates to digitized value.
+% \vspace{-0.1cm}
+\item Better handling of rotated ECG images to improve the framework's robustness, using oriented object detection models.
 \end{itemize}
 \end{itemize}
 
