@@ -156,7 +156,8 @@
 %\RequirePackage[l2tabu, orthodox]{nag}
 \usetikzlibrary{decorations}
 \usetikzlibrary{fadings}
-\usetikzlibrary{snakes}
+% \usetikzlibrary{snakes}
+\usetikzlibrary{decorations.pathmorphing}
 \usetikzlibrary{calc}
 
 
@@ -614,11 +615,17 @@
 \newcommand{\baposter@box@drawborder@bars}[1]{
   \draw[color=#1] \baposterBoxGetShape;%
 }
+% \newcommand{\baposter@box@drawborder@coils}[1]{
+%   \draw[color=#1,segment amplitude=0.35em,segment length=0.4em,snake=coil] \baposterBoxGetShape;%
+% }
+% \newcommand{\baposter@box@drawborder@triangles}[1]{
+%   \draw[color=#1,segment amplitude=0.2em,segment length=0.4em,snake=triangles] \baposterBoxGetShape;%
+% }
 \newcommand{\baposter@box@drawborder@coils}[1]{
-  \draw[color=#1,segment amplitude=0.35em,segment length=0.4em,snake=coil] \baposterBoxGetShape;%
+  \draw[color=#1, decorate, decoration={coil, amplitude=0.35em, segment length=0.4em}] \baposterBoxGetShape;%
 }
 \newcommand{\baposter@box@drawborder@triangles}[1]{
-  \draw[color=#1,segment amplitude=0.2em,segment length=0.4em,snake=triangles] \baposterBoxGetShape;%
+  \draw[color=#1, decorate, decoration={triangles, amplitude=0.2em, segment length=0.4em}] \baposterBoxGetShape;%
 }
 \newcommand{\baposter@box@drawborder@rectangle}[1]{
   \draw[color=#1] \baposterBoxGetShape;%

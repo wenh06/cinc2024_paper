@@ -248,9 +248,8 @@ jobs:
           footmisc
           lm
           wrapfig
-          helvet
+          helvetic
           dvips
-          urw
     - name: Verify helvetic
       run: |
         echo "[Before compile] Check helvetic"
