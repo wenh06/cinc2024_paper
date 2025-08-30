@@ -24,16 +24,16 @@
 \input{preamble}
 
 \usepackage{textcomp}
-
+\usepackage{eso-pic}
 \usepackage{hyperref}
 
 \graphicspath{{images/}} % Directory in which figures are stored
 
- \definecolor{bordercol}{RGB}{40,40,40} % Border color of content boxes
- \definecolor{headercol1}{RGB}{186,215,230} % Background color for the header in the content boxes (left side)
- \definecolor{headercol2}{RGB}{120,120,120} % Background color for the header in the content boxes (right side)
- \definecolor{headerfontcol}{RGB}{0,0,0} % Text color for the header text in the content boxes
- \definecolor{boxcolor}{RGB}{210,235,250} % Background color for the content in the content boxes
+\definecolor{bordercol}{RGB}{40,40,40} % Border color of content boxes
+\definecolor{headercol1}{RGB}{186,215,230} % Background color for the header in the content boxes (left side)
+\definecolor{headercol2}{RGB}{120,120,120} % Background color for the header in the content boxes (right side)
+\definecolor{headerfontcol}{RGB}{0,0,0} % Text color for the header text in the content boxes
+\definecolor{boxcolor}{RGB}{210,235,250} % Background color for the content in the content boxes
 
 \definecolor{jdhblue}{RGB}{2,93,186}
 
@@ -52,6 +52,13 @@
 % {\includegraphics[height=1.1\textheight]{images/baposter_background.pdf}};
 % \end{tikzpicture}
 % }
+
+\AddToShipoutPictureFG*{%
+  \AtPageLowerLeft{%
+    \hspace{0.82em}
+    \raisebox{0.2ex}{\includegraphics[width=0.16\textwidth]{cinc2024-banner.jpg}}
+  }
+}
 
 \begin{poster}{
 grid=false,
@@ -85,7 +92,7 @@ $^2${\it College of Science, China Agricultural University} \\
 \vspace{0.2cm}
 {\Large \bf{The George B. Moody PhysioNet Challenge 2024}, ~~~\bf{Team Revenger}}
 }
-{\includegraphics[scale=0.401]{images/logo_cau_science.png}}
+{\includegraphics[scale=0.401]{logo_cau_science.png}}
 
 
 \newif\ifcoloredtext
@@ -169,7 +176,7 @@ Models are chosen based on performance, efficiency, and compatibility with ECG i
 % finished
 
 \begin{tikzpicture}
-\ImageNode[]{wtmask}{width=0.4\linewidth}{images/weight-mask.pdf}
+\ImageNode[]{wtmask}{width=0.4\linewidth}{weight-mask.pdf}
 \node [rectangle, text width = 8.8cm, inner sep = 2pt, minimum height = 1.0em, right=0.3cm of wtmask.north east, anchor=north west] {\faHandPointRight[regular] Segmentation: Since ECG waveforms occupy only a small portion of the image, we used the BCE loss multiplied by a \textbf{\color{red} weight mask} to balance the loss contribution from different parts of the ECG waveforms. The weight mask is the sum of multiple dilations (e.g., dilation iterations 2, 4, 6, and 8) of the binarized ground truth mask. On the left is an example of a weight mask.};
 \end{tikzpicture}
 \faHandPointRight[regular] Classification: Asymmetric loss $L = -y \cdot (1-p)^{\gamma_{+}} \log(p) - (1-y) \cdot (p_m)^{\gamma_{-}} \log(1-p_m)$
